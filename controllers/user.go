@@ -23,10 +23,10 @@ func GetAllUsers(w http.ResponseWriter, r *http.Request) {
 func GetUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	id := mux.Vars(r)["id"]
+	email := mux.Vars(r)["email"]
 	var user models.User
 
-	if err := models.DB.Where("id = ?", id).First(&user).Error; err != nil {
+	if err := models.DB.Where("email = ?", email).First(&user).Error; err != nil {
 		utils.RespondWithError(w, http.StatusNotFound, "User Not Found")
 		return
 	}
@@ -37,7 +37,10 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 var validate *validator.Validate
 
 type UserInput struct {
-	Name string `json:"name" validate:"required"`
+	Name     string `json:"name" validate:"required"`
+	Email    string `json:"email"`
+	Mobile   string `json:"mobile"`
+	Password string `json:"password"`
 }
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {
@@ -55,7 +58,10 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	user := &models.User{
-		Name: input.Name,
+		Name:     input.Name,
+		Email:    input.Email,
+		Mobile:   input.Mobile,
+		Password: input.Password,
 	}
 
 	models.DB.Create(user)
