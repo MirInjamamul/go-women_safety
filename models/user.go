@@ -1,8 +1,6 @@
 package models
 
-import (
-	"time"
-)
+import "time"
 
 type User struct {
 	ID        uint      `json:"id" gorm:"primary_key"`
@@ -12,13 +10,4 @@ type User struct {
 	Password  string    `json:"password"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
-}
-
-type Complain struct {
-	ID           uint      `json:"id" gorm:"primary_key"`
-	Thana        string    `json:"thana"`
-	ComplainType string    `json:"complain_type"`
-	Comment      string    `json:"comment"`
-	CreatedAt    time.Time `json:"created_at"`
-	UpdatedAt    time.Time `json:"updated_at"`
 }

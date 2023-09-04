@@ -5,8 +5,7 @@ FROM golang:latest
 WORKDIR /app
 
 # Copy the source code from the host machine to the container
-COPY ./cmd /app/cmd
-COPY go.mod /app/go.mod
+COPY . .
 
 # Build the Go application inside the container
 RUN go build -o myapp ./cmd/main.go

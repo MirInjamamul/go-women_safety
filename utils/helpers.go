@@ -6,10 +6,10 @@ import (
 )
 
 func RespondWithError(w http.ResponseWriter, code int, message string) {
-	respondWithJson(w, code, map[string]string{"error": message})
+	RespondWithJson(w, code, map[string]string{"error": message})
 }
 
-func respondWithJson(w http.ResponseWriter, code int, payload interface{}) {
+func RespondWithJson(w http.ResponseWriter, code int, payload interface{}) {
 	response, _ := json.Marshal(payload)
 
 	w.Header().Set("Content-Type", "application/json")

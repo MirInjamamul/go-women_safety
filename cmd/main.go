@@ -2,12 +2,12 @@ package main
 
 import (
 	"net/http"
-
-	"go-safety/controllers"
-	"go-safety/models"
+	"safety/controllers"
+	"safety/models"
 )
 
 func main() {
+	println("Application Started")
 
 	handler := controllers.New()
 
@@ -17,6 +17,5 @@ func main() {
 	}
 
 	models.ConnectDatabase()
-
 	server.ListenAndServe()
 }
