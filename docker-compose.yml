@@ -11,8 +11,8 @@ services:
     environment:
       MYSQL_HOST: mysql
       MYSQL_PORT: 3306
-      MYSQL_USER: root
-      MYSQL_PASSWORD: workspacify2023
+      MYSQL_USER: safety
+      MYSQL_PASSWORD: safetypassword
       MYSQL_DATABASE: safety
 
   mysql:
@@ -21,6 +21,6 @@ services:
       - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: workspacify2023
-      MYSQL_USER: root
-      MYSQL_PASSWORD: workspacify2023
+      MYSQL_USER: safety
+      MYSQL_PASSWORD: safetypassword
       MYSQL_DATABASE: safety
