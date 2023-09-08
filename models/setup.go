@@ -18,7 +18,7 @@ func ConnectDatabase() {
 	// 	"5432",
 	// )
 
-	dsn := "safety:safetypassword@tcp(mysql:3307)/safety?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "safety:safetypassword@tcp(0.0.0.0:3307)/safety?charset=utf8mb4&parseTime=True&loc=Local"
 
 	database, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
