@@ -69,7 +69,14 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 
-	json.NewEncoder(w).Encode(user)
+	// Create the resonse
+	resp := map[string]interface{}{
+		"status":  true,
+		"user":    *user,
+		"token":   token,
+		"message": "Successfully Created User"}
+
+	json.NewEncoder(w).Encode(resp)
 }
 
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
