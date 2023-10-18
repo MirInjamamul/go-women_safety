@@ -7,6 +7,7 @@ import (
 	"safety/models"
 	"safety/utils"
 
+	"github.com/dgrijalva/jwt-go"
 	"github.com/gorilla/mux"
 )
 
@@ -53,6 +54,17 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		Password: input.Password,
 	}
 
+	// Generate bearer Token for the user
+	token, err := GenerateBearerToken(*user)
+
+	if err != nil {
+		utils.RespondWithError(w, http.StatusInternalServerError, "Token Generation Failed")
+		return
+	}
+
+	//store the token
+	user.Token = token
+
 	models.DB.Create(user)
 
 	w.Header().Set("Content-Type", "application/json")
@@ -98,4 +110,25 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusNoContent)
 	json.NewEncoder(w).Encode(user)
+}
+
+func GenerateBearerToken(user models.User) (string, error) {
+	//Define the JWT with user information
+	claims := jwt.MapClaims{
+		"id":    user.ID,
+		"email": user.Email,
+	}
+
+	//Create the token with claims
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+
+	//Sign the token with Secret Key
+	tokenString, err := token.SignedString([]byte("safety"))
+
+	if err != nil {
+		return "", err
+	}
+
+	return tokenString, nil
+
 }
