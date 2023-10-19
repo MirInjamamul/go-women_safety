@@ -16,7 +16,7 @@ func New() http.Handler {
 	router.HandleFunc("/api/users/{id}", DeleteUser).Methods("DELETE")
 	// router.HandleFunc("/api/complains", GetAllComplains).Methods("GET")
 	// router.HandleFunc("/api/complain/{id}", GetComplain).Methods("GET")
-	// router.HandleFunc("/api/complain", CreateComplain).Methods("POST")
+	router.HandleFunc("/api/complain", CreateComplain).Methods("POST")
 	// router.HandleFunc("/api/complain/{id}", DeleteComplain).Methods("DELETE")
 
 	return router
