@@ -27,6 +27,7 @@ func ConnectDatabase() {
 	}
 
 	database.AutoMigrate(&User{})
+	database.AutoMigrate(&Complain{})
 
 	DB = database
 }
